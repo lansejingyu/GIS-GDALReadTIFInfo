@@ -10,32 +10,32 @@ import os
 
 
 def Files():
-	FilePath = input("输入.TIF文件路径+文件名：")
+	FilePath = input("请输入.TIF文件路径+文件名(如:E:\TIF\masaike\K50F038012.tif)：")
 	dataset = gdal.Open(r'' + FilePath)  # 打开已有的GeoTIF文件
 
 	def Blanklines():  # 打印一行空白行，定义一个函数
 		print()
 
-	def GetMetadata():  # 读取影像的元数据信息
+	def GetMetadata():  # 获取影像的元数据信息
 		print("1.影像的元数据信息:\n", dataset.GetMetadata())
 
-	def GetDescription():  # 获得栅格的描述信息
+	def GetDescription():  # 获取栅格的描述信息
 		print("2.栅格的描述信息:\n", dataset.GetDescription())
 
-	def RasterCount():  # 获得栅格数据集的波段数（获取栅格数目）
+	def RasterCount():  # 获取栅格数据集的波段数（获取栅格数目）
 		print("3.栅格数据集的波段数(栅格数目):\n", dataset.RasterCount)
 
-	def GetGeoTransform():  # 获得空间参考(栅格数据的六参数:左上角坐标，像元X、Y方向大小，旋转等信息。 要注意，Y方向的像元大小为负值。)
+	def GetGeoTransform():  # 获取空间参考(栅格数据的六参数:左上角坐标，像元X、Y方向大小，旋转等信息。 要注意，Y方向的像元大小为负值。)
 		print("4.空间参考(栅格数据的六参数:左上角坐标，像元X、Y方向大小，旋转等信息。 要注意，Y方向的像元大小为负值。):\n",
 			  dataset.GetGeoTransform())
 
-	def RasterSize():  # 影像大小(栅格数据的宽度(X方向上的像素个数),栅格数据的高度(Y方向上的像素个数))
+	def RasterSize():  # 获取影像大小(栅格数据的宽度(X方向上的像素个数),栅格数据的高度(Y方向上的像素个数))
 		print("5.影像大小:\n", "X方向上的像素个数:", dataset.RasterXSize, "Y方向上的像素个数:", dataset.RasterYSize)
 
-	def GetProjection():  # 栅格数据的投影信息
+	def GetProjection():  # 获取栅格数据的投影信息
 		print("6.栅格数据的投影信息:\n", dataset.GetProjection())
 
-	def GetRasterBand():  # 查看波段的基本信息
+	def GetRasterBand():  # 获取波段的基本信息
 		print("7.波段的基本信息:")
 		print("第一波段:", dataset.GetRasterBand(1))  # 这是函数的参数使用波段的索引值。
 		print("第二波段:", dataset.GetRasterBand(2))
@@ -49,8 +49,8 @@ def Files():
 	# def GetNoDataValue():
 	# 	print(dataset.GetRasterBand(1).GetNoDataValue())
 
-	def Getnum():  # 表示在本波段数值中最大值、最小值
-		print("9.本波段数值中最大值、最小值(若结果为None,是因为对于文件格式不会有固有的最大最小值):")
+	def Getnum():  # 获取当前本波段数值中最大值、最小值
+		print("9.当前波段数值中最大值、最小值(若结果为None,是因为对于文件格式不会有固有的最大最小值):")
 		print("第一波段:")
 		print("最大值:", dataset.GetRasterBand(1).GetMaximum(), "最小值:", dataset.GetRasterBand(1).GetMinimum())
 		print("第二波段:")
@@ -67,22 +67,7 @@ def Files():
 		print("第三波段", dataset.GetRasterBand(3).ComputeRasterMinMax())
 		print("第四波段", dataset.GetRasterBand(4).ComputeRasterMinMax())
 
-	def DataType():  # 图像中实际数值的数据类型,具体数据类型定义在gdalconst模块里。这里的类型是与numpy中的类型对应的。
-		'''
-		gdalconst与整型的对应值:
-		未知或未指定类型 gdalconst.GDT_Unknown 0
-		8位无符整型 gdalconst.GDT_Byte 1
-		16位无符整型 gdalconst.GDT_UInt16 2
-		16位整型 gdalconst.GDT_Int16 3
-		32位无符整型 gdalconst.GDT_UInt32 4
-		32位整型值 gdalconst.GDT_Int32 5
-		32位浮点型 gdalconst.GDT_Float32 6
-		64位浮点型 gdalconst.GDT_Float64 7
-		16位复数整型 gdalconst.GDT_CInt16 8
-		32位复数整型 gdalconst.GDT_CInt32 9
-		32位复数浮点型 gdalconst.GDT_CFloat32 10
-		64位复数浮点型 gdalconst.GDT_CFloat64 11
-		'''
+	def DataType():  # 获取图像中实际数值的数据类型,具体数据类型定义在gdalconst模块里。这里的类型是与numpy中的类型对应的。
 		print("11.获取当前索引波段数值的数据类型:")
 		print("第一波段数值的数据类型:", (dataset.GetRasterBand(1)).DataType)
 		print("第二波段数值的数据类型:", (dataset.GetRasterBand(2)).DataType)
