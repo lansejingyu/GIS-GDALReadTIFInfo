@@ -9,7 +9,7 @@ from osgeo import gdal
 import os
 
 
-def A():
+def Files():
 	FilePath = input("输入.TIF文件路径+文件名：")
 	dataset = gdal.Open(r'' + FilePath)  # 打开已有的GeoTIF文件
 
@@ -67,6 +67,44 @@ def A():
 		print("第三波段", dataset.GetRasterBand(3).ComputeRasterMinMax())
 		print("第四波段", dataset.GetRasterBand(4).ComputeRasterMinMax())
 
+	def DataType():  # 图像中实际数值的数据类型,具体数据类型定义在gdalconst模块里。这里的类型是与numpy中的类型对应的。
+		'''
+		gdalconst与整型的对应值:
+		未知或未指定类型 gdalconst.GDT_Unknown 0
+		8位无符整型 gdalconst.GDT_Byte 1
+		16位无符整型 gdalconst.GDT_UInt16 2
+		16位整型 gdalconst.GDT_Int16 3
+		32位无符整型 gdalconst.GDT_UInt32 4
+		32位整型值 gdalconst.GDT_Int32 5
+		32位浮点型 gdalconst.GDT_Float32 6
+		64位浮点型 gdalconst.GDT_Float64 7
+		16位复数整型 gdalconst.GDT_CInt16 8
+		32位复数整型 gdalconst.GDT_CInt32 9
+		32位复数浮点型 gdalconst.GDT_CFloat32 10
+		64位复数浮点型 gdalconst.GDT_CFloat64 11
+		'''
+		print("11.获取当前索引波段数值的数据类型:")
+		print("第一波段数值的数据类型:", (dataset.GetRasterBand(1)).DataType)
+		print("第二波段数值的数据类型:", (dataset.GetRasterBand(2)).DataType)
+		print("第三波段数值的数据类型:", (dataset.GetRasterBand(3)).DataType)
+		print("第四波段数值的数据类型:", (dataset.GetRasterBand(4)).DataType)
+		print('''
+提示:
+gdalconst与整型的对应值:
+未知或未指定类型 gdalconst.GDT_Unknown 0
+8位无符整型 gdalconst.GDT_Byte 1
+16位无符整型 gdalconst.GDT_UInt16 2
+16位整型 gdalconst.GDT_Int16 3
+32位无符整型 gdalconst.GDT_UInt32 4
+32位整型值 gdalconst.GDT_Int32 5
+32位浮点型gdalconst.GDT_Float32 6
+64位浮点型gdalconst.GDT_Float64 7
+16位复数整型gdalconst.GDT_CInt16 8
+32位复数整型gdalconst.GDT_CInt32 9
+32位复数浮点型gdalconst.GDT_CFloat32 10
+64位复数浮点型gdalconst.GDT_CFloat64 11
+''')
+
 	GetMetadata()
 	Blanklines()
 	GetDescription()
@@ -87,8 +125,9 @@ def A():
 	Blanklines()
 	ComputeRasterMinMax()
 	Blanklines()
-	A()
+	DataType()
+	Files()
 
 
-A()
+Files()
 # os.system('pause')
