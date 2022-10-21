@@ -60,8 +60,9 @@ def Files():
 		print("第二波段:", dataset.GetRasterBand(2).GetNoDataValue())
 		print("第三波段:", dataset.GetRasterBand(3).GetNoDataValue())
 		print("第四波段:", dataset.GetRasterBand(4).GetNoDataValue())
-		print(
-			"'对于GeoTIFFs，nodata值存储在TIFF tag_GDAL_NODATA TIFF标记中。新创建的GeoTIFF文件可以没有nodata值（没有标记），但一旦设置并存储了nodata值，就只能为其提供新值，不能将其删除。也不能设置为数据类型范围之外的值；对于8位数据传递 nan ， -inf 或 256 到 GDALSetNoDataValue() 与传递0具有相同的效果。'")
+		print('''
+	提示：
+	对于GeoTIFFs，nodata值存储在TIFF tag_GDAL_NODATA TIFF标记中。新创建的GeoTIFF文件可以没有nodata值（没有标记），但一旦设置并存储了nodata值，就只能为其提供新值，不能将其删除。也不能设置为数据类型范围之外的值；对于8位数据传递 nan ， -inf 或 256 到 GDALSetNoDataValue() 与传递0具有相同的效果。''')
 
 	def Getnum():  # 获取当前本波段数值中最大值、最小值
 		print("11.当前波段数值中最大值、最小值(若结果为None,是因为对于文件格式不会有固有的最大最小值):")
