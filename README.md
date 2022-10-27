@@ -3,6 +3,17 @@
 通过gdal库实现.TIF文件信息的获取，计算。
 ![image](https://user-images.githubusercontent.com/50358622/196157120-fedcaa4b-98e4-49f0-bc4f-3def5a1c1509.png)
 
+----v1.0.3  
+新增以下功能:  
+1.自动识别.tif / .shp文件类型;  
+1.获取.shp文件属性;  
+2.实现绘制.shp文件（独立窗口）;  
+
+修复:  
+1.修改已知bug;  
+2.调整个别函数功能，不影响正常使用。  
+![img_1.png](img_1.png)
+
 ----v1.0.2  
 新增两个功能：    
 1.计算当前栅格影像面积；  
