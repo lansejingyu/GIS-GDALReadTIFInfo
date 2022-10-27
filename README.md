@@ -8,6 +8,7 @@
 1.自动识别.tif / .shp文件类型;  
 1.获取.shp文件属性;  
 2.实现绘制.shp文件（独立窗口）;  
+![image](https://user-images.githubusercontent.com/50358622/198241624-2b7cca2e-f465-46d2-9a5f-8de0ffc543e4.png)
 
 修复:  
 1.修改已知bug;  
