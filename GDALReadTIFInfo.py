@@ -180,10 +180,11 @@ def Files():
 		def Bbox():  # 输出当前.shp的文件范围（外包矩形）
 			print("3.当前.shp文件范围(外包矩形):\n", datasetShp.bbox)
 
-		def BorderPoints():# 返回第1个对象的所有点坐标
+		def BorderPoints():  # 返回第1个对象的所有点坐标
 			border = datasetShp.shapes()  # .shapes()读取全部几何数据信息，存放着该文件中所有对象的 几何数据,border是一个列表
 			border_points = border[0].points  # 返回第1个对象的所有点坐标
 			print("4.当前.shp文件所有点坐标:\n", border_points)
+
 		def NumRecords():  # 输出shp文件的要素数据
 			print("5.当前.shp文件的要素数据:\n", datasetShp.numRecords)
 
@@ -205,8 +206,8 @@ def Files():
 	''')
 
 		def Plt():
-			choose=input("是否绘制.shp文件矢量范围? (y/n):")
-			if choose=="y":
+			choose = input("是否绘制.shp文件矢量范围? (y/n):")
+			if choose == "y":
 				border = datasetShp.shapes()  # .shapes()读取全部几何数据信息，存放着该文件中所有对象的 几何数据,border是一个列表
 				border_points = border[0].points  # 返回第1个对象的所有点坐标
 				# print("当前.shp文件所有点坐标:",border_points)
@@ -240,6 +241,7 @@ def Files():
 	else:
 		def Blanklines():  # 打印一行空白行，定义一个函数
 			print()
+
 		print("请选择正确的栅格影像文件!(目前仅支持.tif / .shp文件)")
 		Blanklines()
 		Files()
