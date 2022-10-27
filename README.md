@@ -1,6 +1,6 @@
 # GIS-GDALReadTIFInfo
 
-通过gdal库实现.TIF文件信息的获取，计算。
+通过gdal库实现.tif / .shp文件信息的获取，绘制，计算。
 ![image](https://user-images.githubusercontent.com/50358622/196157120-fedcaa4b-98e4-49f0-bc4f-3def5a1c1509.png)
 
 ----v1.0.3  
