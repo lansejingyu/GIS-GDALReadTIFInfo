@@ -8,6 +8,7 @@
 from osgeo import gdal
 import shapefile
 from matplotlib import pyplot as plt
+from osgeo import ogr
 import os
 
 
@@ -192,10 +193,11 @@ def Files():
 		def Bbox():  # 输出当前.shp的文件范围（外包矩形）
 			print("3.当前.shp文件范围(外包矩形):\n", datasetShp.bbox)
 
-		def BorderPoints():  # 返回第1个对象的所有点坐标
-			border = datasetShp.shapes()  # .shapes()读取全部几何数据信息，存放着该文件中所有对象的 几何数据,border是一个列表
-			border_points = border[0].points  # 返回第1个对象的所有点坐标
-			print("4.当前.shp文件所有点坐标:\n", border_points)
+		def GetSpatialRef():  # 读取SHP的投影信息
+			shp_driver = ogr.GetDriverByName('ESRI Shapefile')
+			shp_dataset = shp_driver.Open(FilePath)
+			shp_layer = shp_dataset.GetLayer()
+			print("4.当前.shp文件的投影信息:\n", shp_layer.GetSpatialRef())
 
 		def NumRecords():  # 输出shp文件的要素数据
 			print("5.当前.shp文件的要素数据:\n", datasetShp.numRecords)
@@ -218,8 +220,20 @@ def Files():
 	'''
 			      )
 
+		def BorderPoints():  # 返回第1个对象的所有点坐标
+			choose = input("8.是否读取 当前.shp文件所有点坐标? (y/n):")
+			if choose == "y":
+				border = datasetShp.shapes()  # .shapes()读取全部几何数据信息，存放着该文件中所有对象的 几何数据,border是一个列表
+				border_points = border[0].points  # 返回第1个对象的所有点坐标
+				print("当前.shp文件所有点坐标:\n", border_points)
+				print()
+			elif choose == "n":
+				print()
+			else:
+				print()
+
 		def Plt():
-			choose = input("是否绘制.shp文件矢量范围? (y/n):")
+			choose = input("9.是否绘制.shp文件矢量范围? (y/n):")
 			if choose == "y":
 				border = datasetShp.shapes()  # .shapes()读取全部几何数据信息，存放着该文件中所有对象的 几何数据,border是一个列表
 				border_points = border[0].points  # 返回第1个对象的所有点坐标
@@ -231,6 +245,12 @@ def Files():
 				ax.grid()  # 添加网格线
 				ax.axis('equal')
 				plt.show()
+			elif choose == "n":
+				Blanklines()
+				Files()
+			else:
+				Blanklines()
+				Files()
 
 		ShapeType()
 		Blanklines()
@@ -238,7 +258,7 @@ def Files():
 		Blanklines()
 		Bbox()
 		Blanklines()
-		BorderPoints()
+		GetSpatialRef()
 		Blanklines()
 		NumRecords()
 		Blanklines()
@@ -246,16 +266,19 @@ def Files():
 		Blanklines()
 		Records()
 		Blanklines()
+		BorderPoints()
+		# Blanklines()
 		Plt()
 		Blanklines()
-
 		Files()
 
 	else:
 		def Blanklines():  # 打印一行空白行，定义一个函数
 			print()
 
-		print("请选择正确的栅格影像文件!(目前仅支持.tif / .shp文件)")
+		print("""→→→→输入的文件格式错误!!!←←←←←
+请选择正确的栅格影像文件!(目前仅支持.tif / .shp文件)"""
+		      )
 		Blanklines()
 		Files()
 
