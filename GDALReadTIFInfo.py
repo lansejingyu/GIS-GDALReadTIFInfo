@@ -13,7 +13,8 @@ import os
 
 def Files():
 	FilePath = input('''----------目前仅支持.tif / .shp文件----------
-请输入栅格影像文件路径+文件名(如:E:\TIF\masaike\K50F038012.tif)：''')
+请输入栅格影像文件路径+文件名(如:E:\TIF\masaike\K50F038012.tif)：'''
+	                 )
 	if ".tif" in FilePath:
 		datasetTif = gdal.Open(r'' + FilePath)  # 使用gdal库打开已有的GeoTIF文件
 	elif ".shp" in FilePath:
@@ -36,17 +37,20 @@ def Files():
 		def GetGeoTransform():  # 获取空间参考(栅格数据的六参数:左上角坐标，像元X、Y方向大小，旋转等信息。 要注意，Y方向的像元大小为负值。)
 			print(
 				"4.栅格影像空间参考(栅格数据的六参数:左上角坐标，像元X、Y方向大小，旋转等信息。 要注意，Y方向的像元大小为负值。):\n",
-				datasetTif.GetGeoTransform())
+				datasetTif.GetGeoTransform()
+			)
 
 		def RasterSize():  # 获取影像大小(栅格数据的宽度(X方向上的像素个数),栅格数据的高度(Y方向上的像素个数))
 			print("5.栅格影像大小:\n", "X方向上的像素个数:", datasetTif.RasterXSize, "\n Y方向上的像素个数:",
-				  datasetTif.RasterYSize)
+			      datasetTif.RasterYSize
+			      )
 
 		def GetAcreage():  # 计算当前栅格影像面积
 			print("6.栅格影像面积:\n",
-				  datasetTif.RasterXSize * datasetTif.RasterYSize * (datasetTif.GetGeoTransform())[1:2][0] *
-				  (datasetTif.GetGeoTransform())[1:2][
-					  0] / 1000000, "平方千米")
+			      datasetTif.RasterXSize * datasetTif.RasterYSize * (datasetTif.GetGeoTransform())[1:2][0] *
+			      (datasetTif.GetGeoTransform())[1:2][
+				      0] / 1000000, "平方千米"
+			      )
 
 		def GetProjection():  # 获取栅格数据的投影信息
 			print("7.栅格影像数据的投影信息:\n", datasetTif.GetProjection())
@@ -60,8 +64,9 @@ def Files():
 
 		def GetSize():  # 获取波段大小:波段图像的宽和高（像元为单位）,与使用 RasterXSize() 与 RasterYSize() 获取的值一致;数据类型:是图像中实际数值的数据类型，表示8位无符整型
 			print("9.栅格影像波段大小:波段图像的宽和高（像元为单位）:\n", "宽(X):", datasetTif.GetRasterBand(1).XSize,
-				  "高(Y):",
-				  datasetTif.GetRasterBand(1).YSize, "数据类型:", datasetTif.GetRasterBand(2).DataType)
+			      "高(Y):",
+			      datasetTif.GetRasterBand(1).YSize, "数据类型:", datasetTif.GetRasterBand(2).DataType
+			      )
 
 		def GetNoDataValue():  # 获取当前栅格影像各波段的nodata值。
 			print("10.栅格影像的nodata值:")
@@ -72,22 +77,27 @@ def Files():
 			print('''
 			提示：
 			对于GeoTIFFs，nodata值存储在TIFF tag_GDAL_NODATA TIFF标记中。新创建的GeoTIFF文件可以没有nodata值（没有标记），但一旦设置并存储了nodata值，就只能为其提供新值，不能将其删除。也不能设置为数据类型范围之外的值；对于8位数据传递 nan ， -inf 或 256 到 GDALSetNoDataValue() 与传递0具有相同的效果。
-			''')
+			'''
+			      )
 
 		def Getnum():  # 获取当前本波段数值中最大值、最小值
 			print("11.当前波段数值中最大值、最小值(若结果为None,是因为对于文件格式不会有固有的最大最小值):")
 			print("第一波段:")
 			print("最大值:", datasetTif.GetRasterBand(1).GetMaximum(), "最小值:",
-				  datasetTif.GetRasterBand(1).GetMinimum())
+			      datasetTif.GetRasterBand(1).GetMinimum()
+			      )
 			print("第二波段:")
 			print("最大值:", datasetTif.GetRasterBand(2).GetMaximum(), "最小值:",
-				  datasetTif.GetRasterBand(2).GetMinimum())
+			      datasetTif.GetRasterBand(2).GetMinimum()
+			      )
 			print("第三波段:")
 			print("最大值:", datasetTif.GetRasterBand(3).GetMaximum(), "最小值:",
-				  datasetTif.GetRasterBand(3).GetMinimum())
+			      datasetTif.GetRasterBand(3).GetMinimum()
+			      )
 			print("第四波段:")
 			print("最大值:", datasetTif.GetRasterBand(4).GetMaximum(), "最小值:",
-				  datasetTif.GetRasterBand(4).GetMinimum())
+			      datasetTif.GetRasterBand(4).GetMinimum()
+			      )
 
 		def ComputeRasterMinMax():  # 计算得到当前索引波段的最大最小值
 			print("12.计算得到当前索引波段的最大最小值:")
@@ -116,7 +126,8 @@ def Files():
 	16位复数整型gdalconst.GDT_CInt16 8
 	32位复数整型gdalconst.GDT_CInt32 9
 	32位复数浮点型gdalconst.GDT_CFloat32 10
-	64位复数浮点型gdalconst.GDT_CFloat64 11''')
+	64位复数浮点型gdalconst.GDT_CFloat64 11'''
+			      )
 
 		GetMetadata()
 		Blanklines()
@@ -172,7 +183,8 @@ def Files():
 	  28         MultiPointM
 	  31         MultiPatch
 	
-	未列入上述表中的Shape type有2、4、6以及33等等，这些是做为保留以备将来使用。目前每个shape文件被限定为只能包含上述类型的一种，将来shape文件可能会被允许包含一种以上的shape类型。''')
+	未列入上述表中的Shape type有2、4、6以及33等等，这些是做为保留以备将来使用。目前每个shape文件被限定为只能包含上述类型的一种，将来shape文件可能会被允许包含一种以上的shape类型。'''
+			      )
 
 		def Encoding():  # 输出shp文件编码
 			print("2.当前.shp文件编码:\n", datasetShp.encoding)
@@ -203,7 +215,8 @@ def Files():
 	  L         逻辑，表示布尔值True / False值
 	  D         日期
 	  M         备忘录，在GIS中没有意义，而是xbase规范的一部分。
-	''')
+	'''
+			      )
 
 		def Plt():
 			choose = input("是否绘制.shp文件矢量范围? (y/n):")
