@@ -245,12 +245,11 @@ def Files():
 				ax.grid()  # 添加网格线
 				ax.axis('equal')
 				plt.show()
+				Blanklines()
 			elif choose == "n":
 				Blanklines()
-				Files()
 			else:
 				Blanklines()
-				Files()
 
 		ShapeType()
 		Blanklines()
