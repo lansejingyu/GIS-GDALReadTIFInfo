@@ -3,6 +3,14 @@
 通过gdal库实现.tif / .shp文件信息的获取，绘制，计算。
 ![image](https://user-images.githubusercontent.com/50358622/196157120-fedcaa4b-98e4-49f0-bc4f-3def5a1c1509.png)
 
+----v1.0.4  
+新增以下功能:  
+1.增加“读取SHP的投影信息”功能：.GetSpatialRef()
+
+修复:  
+1.修改已知bug;  
+2.优化代码。  
+
 ----v1.0.3  
 新增以下功能:  
 1.自动识别.tif / .shp文件类型;  
