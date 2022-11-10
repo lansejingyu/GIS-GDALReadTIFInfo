@@ -9,6 +9,7 @@ from osgeo import gdal
 import shapefile
 from matplotlib import pyplot as plt
 from osgeo import ogr
+import decimal
 import os
 
 
@@ -16,13 +17,13 @@ def Files():
 	FilePath = input('''----------目前仅支持.tif / .shp文件----------
 请输入栅格影像文件路径+文件名(如:E:\TIF\masaike\K50F038012.tif)：'''
 	                 )
-	if ".tif" in FilePath:
+	if ".tif" in FilePath or ".TIF" in FilePath:
 		datasetTif = gdal.Open(r'' + FilePath)  # 使用gdal库打开已有的GeoTIF文件
 	elif ".shp" in FilePath:
 		datasetShp = shapefile.Reader(r'' + FilePath)  # 使用shapefile库打开已有的shp文件
 	print("")
 
-	if ".tif" in FilePath:
+	if ".tif" in FilePath or ".TIF" in FilePath:
 		def Blanklines():  # 打印一行空白行，定义一个函数
 			print()
 
@@ -47,10 +48,10 @@ def Files():
 			      )
 
 		def GetAcreage():  # 计算当前栅格影像面积
-			print("6.栅格影像面积:\n",
-			      datasetTif.RasterXSize * datasetTif.RasterYSize * (datasetTif.GetGeoTransform())[1:2][0] *
-			      (datasetTif.GetGeoTransform())[1:2][
-				      0] / 1000000, "平方千米"
+			acreage = (datasetTif.RasterXSize * datasetTif.RasterYSize * (datasetTif.GetGeoTransform())[1:2][0] *
+			           (datasetTif.GetGeoTransform())[1:2][0] / 1000000)
+			print("6.栅格影像面积:\n", decimal.Decimal(value=acreage).quantize(exp=decimal.Decimal(value='1.00')),
+			      "平方千米", "--保留两位小数\n", acreage, "平方千米", "--原始数据"
 			      )
 
 		def GetProjection():  # 获取栅格数据的投影信息
@@ -213,7 +214,7 @@ def Files():
 	字段索引     字段类型
 	  C         字符,文字
 	  N         数字,带或不带小数
-	  F         浮动(与'N'相同)
+	  F         浮点(与'N'相同)
 	  L         逻辑，表示布尔值True / False值
 	  D         日期
 	  M         备忘录，在GIS中没有意义，而是xbase规范的一部分。
