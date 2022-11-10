@@ -10,7 +10,6 @@ import shapefile
 from matplotlib import pyplot as plt
 from osgeo import ogr
 import decimal
-import os
 
 
 def Files():
@@ -284,4 +283,3 @@ def Files():
 
 
 Files()
-# os.system('pause')
