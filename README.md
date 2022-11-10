@@ -3,6 +3,11 @@
 通过gdal库实现.tif / .shp文件信息的获取，绘制，计算。
 ![image](https://user-images.githubusercontent.com/50358622/196157120-fedcaa4b-98e4-49f0-bc4f-3def5a1c1509.png)
 
+----v1.0.5  
+更新内容：  
+1.增加“.TIF”文件的判断；  
+2.“栅格影像面积”功能结果增加“保留两位小数”显示。  
+
 ----v1.0.4  
 新增以下功能:  
 1.增加“读取SHP的投影信息”功能：.GetSpatialRef()
